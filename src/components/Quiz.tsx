@@ -75,12 +75,12 @@ export default function Quiz({ onComplete }: QuizProps) {
         className="max-w-xl mx-auto text-left px-6 py-12"
         id="quiz-result"
       >
-        <h2 className="text-4xl md:text-5xl font-serif font-medium mb-12 text-brand-ink leading-tight">
+        <h2 className="text-4xl md:text-5xl font-serif font-light mb-12 text-brand-ink leading-tight">
           Você não está sozinha.
         </h2>
         
         <div className="space-y-6 text-lg text-brand-ink/80 leading-relaxed mb-12">
-          <p className="font-semibold text-brand-ink">
+          <p className="text-brand-ink">
             O que você sente tem nome. E tem caminho de volta.
           </p>
           <p>
@@ -91,23 +91,23 @@ export default function Quiz({ onComplete }: QuizProps) {
           </p>
         </div>
 
-        <blockquote className="border-l-4 border-brand-accent pl-6 py-2 text-brand-ink/60 italic text-xl mb-12">
+        <blockquote className="bg-brand-creme border-l-4 border-brand-accent p-8 text-brand-ink/70 italic text-xl mb-12">
           "Não era sobre chegar a algum lugar. Era sobre se lembrar de quem ela era antes de esquecer."
-          <footer className="text-sm mt-2 not-italic text-brand-ink/40 uppercase tracking-widest font-bold">
-            — A Vida Invisível de Addie LaRue
+          <footer className="text-xs mt-4 not-italic text-brand-ink/40 uppercase tracking-widest font-bold">
+            — A Vida Invisível de Addie LaRue, V.E. Schwab
           </footer>
         </blockquote>
 
         <button
           onClick={onComplete}
-          className="w-full bg-brand-accent text-white py-5 rounded-full font-bold text-lg hover:bg-brand-accent/90 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-brand-accent/20"
+          className="w-full bg-brand-accent text-white py-5 rounded-full font-bold text-xl hover:bg-brand-accent/90 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-brand-accent/20"
           id="quiz-finish-cta"
         >
           QUERO COMEÇAR MINHA RECONEXÃO — R$47
-          <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
         </button>
         
-        <p className="mt-6 text-center text-stone-400 text-sm font-medium">
+        <p className="mt-6 text-center text-stone-400 text-sm">
           Acesso imediato · Garantia de 30 dias
         </p>
       </motion.div>
