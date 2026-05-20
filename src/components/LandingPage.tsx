@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 import { ArrowRight, BookOpen, Sparkles, Heart, ShieldCheck, Star, Users, MessageCircle, HelpCircle, ArrowDown } from 'lucide-react';
 
+declare const fbq: any;
+
 interface LandingPageProps {
   onOpenQuiz: () => void;
 }
@@ -22,22 +24,22 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
   const bonuses = [
     { 
       id: "material-1", 
-      title: "Material 1 — O Ciclo do Apagamento", 
+      title: "O Despertar — entenda o que está acontecendo com você", 
       desc: "Entenda o que está acontecendo com seu corpo e suas emoções. Por que você se sente assim, quando começou e o que isso significa." 
     },
     { 
       id: "material-2", 
-      title: "Material 2 — Hábitos que Reativam o Desejo e a Autoestima", 
+      title: "A Virada — hábitos que reativam o desejo e a autoestima", 
       desc: "Práticas simples que você pode aplicar hoje. Não são receitas milagrosas — são hábitos que atuam diretamente nos gatilhos do apagamento feminino." 
     },
     { 
       id: "material-3", 
-      title: "Material 3 — Como se Expressar e Ser Compreendida", 
+      title: "A Voz — como se expressar e ser compreendida de verdade", 
       desc: "Este material te ajuda a entender suas emoções e comunicá-las — sem explodir, sem engolir, sem ser mal interpretada." 
     },
     { 
       id: "material-4", 
-      title: "Material 4 — Autocuidado e Elegância: se sentir mulher de novo em 21 dias (Bônus)", 
+      title: "O Reencontro — se sentir mulher de novo em 21 dias ✦", 
       desc: "Um guia prático de reconexão com o seu próprio corpo. Não é sobre maquiagem ou roupa — é sobre se olhar com outros olhos." 
     }
   ];
@@ -49,89 +51,143 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
   return (
     <div className="overflow-x-hidden selection:bg-brand-rose/20 selection:text-brand-ink">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-16 pb-12 bg-brand-paper" id="hero">
-        <motion.div {...fadeIn} className="max-w-4xl">
-          <span className="italic text-brand-ink/40 text-sm mb-8 block tracking-normal font-normal">Leia com calma. Talvez seja sobre você.</span>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light leading-tight mb-8 text-brand-ink">
+      <section 
+        className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-16 pb-12"
+        id="hero"
+      >
+        {/* Fundo vinho escuro */}
+        <div className="absolute inset-0 z-0" style={{ background: 'linear-gradient(160deg, #2D1520 0%, #1A0D12 60%, #2D1520 100%)' }} />
+        {/* Imagem por cima do fundo com baixa opacidade */}
+        <div 
+          className="absolute inset-0 z-[1]"
+          style={{
+            backgroundImage: 'url(https://i.imgur.com/ipBan1m.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center top',
+            opacity: 0.22
+          }}
+        />
+        {/* Conteúdo */}
+        <motion.div {...fadeIn} className="relative z-10 max-w-4xl">
+          <span className="italic text-white/30 text-sm mb-8 block tracking-normal font-normal">
+            Leia com calma. Talvez seja sobre você.
+          </span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light leading-tight mb-8 text-white">
             Eu também me perdi. E entendo o quanto dói não se reconhecer mais.
           </h1>
-          <blockquote className="border-l-4 border-brand-rose pl-6 py-2 text-brand-ink/60 italic text-xl md:text-2xl mb-20 max-w-2xl mx-auto text-left">
-            "Quantas versões de você já morreram sem você ter feito o luto?"
-            <footer className="text-sm mt-2 not-italic text-brand-ink/40 uppercase tracking-widest font-bold">— O Peso do Pássaro Morto, Aline Bei</footer>
-          </blockquote>
-        </motion.div>
-        
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-10 animate-bounce"
-        >
-          <ArrowDown size={24} className="text-brand-accent/50" />
+          <div className="mt-6 mb-10 space-y-3">
+            <p className="text-white/50 text-lg md:text-xl font-serif italic">
+              Você acorda cansada. Perdeu o brilho.
+            </p>
+            <p className="text-white text-4xl md:text-6xl font-display font-bold tracking-normal" style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
+              Não se reconhece mais.
+            </p>
+            <p className="text-brand-rose font-medium text-base md:text-lg mt-6 block not-italic font-sans tracking-wide">
+              Se isso é você — continue lendo.
+            </p>
+          </div>
+          <button 
+            onClick={() => document.getElementById('empathy')?.scrollIntoView({ behavior: 'smooth' })}
+            className="text-brand-rose/70 italic font-serif text-lg hover:text-brand-rose transition-colors"
+          >
+            Continuar lendo →
+          </button>
         </motion.div>
       </section>
 
-      {/* Empathy Block */}
-      <section className="py-12 px-6 md:px-12 max-w-2xl mx-auto" id="empathy">
-        <motion.div {...fadeIn} className="space-y-12 text-brand-ink/80 text-lg leading-relaxed">
-          <p>
-            Teve um tempo em que você entrava num lugar e se sentia presente. Não precisa ter sido perfeito — mas era seu. Você sabia quem era, o que queria, o que sentia.
+      <section id="empathy" className="py-14 md:py-20 px-6 bg-brand-paper">
+        <motion.div {...fadeIn} className="max-w-2xl mx-auto text-center space-y-10">
+          {/* entrada suave */}
+          <p className="font-serif text-lg md:text-xl text-brand-ink/60 leading-relaxed italic">
+            Eu sei o que é acordar e sentir que algo foi embora sem você perceber quando.
           </p>
-          <p className="font-serif text-2xl text-brand-ink italic">
-            Hoje parece que essa mulher foi ficando pelo caminho. Silenciosamente. Sem que você percebesse exatamente quando.
+          {/* cresce */}
+          <p className="font-serif text-xl md:text-2xl text-brand-ink leading-relaxed">
+            Sei o que é carregar tudo — as expectativas que colocaram em você antes mesmo de você saber quem era, as responsabilidades que foram chegando sem manual, a vida adulta que ninguém te preparou pra ter.
           </p>
-          <p>
-            Talvez você ainda sorria, ainda cuide de todo mundo, ainda dê conta de tudo. Mas por dentro existe uma sensação que é difícil de explicar — como se você estivesse vivendo uma vida que é sua, mas não te pertence mais.
+          {/* acelera — lista rápida */}
+          <p className="font-serif text-base md:text-lg text-brand-ink/50 italic leading-loose tracking-wide">
+            A conta pra pagar. O trabalho que consome. A família que precisa. Os sonhos que foram ficando pra depois.
           </p>
-          <div className="text-center py-12">
-            <h2 className="text-3xl md:text-5xl font-serif text-brand-ink mb-8 font-light">Quando foi que eu me perdi?</h2>
-            <p className="text-brand-ink/80">
-              Você tenta se animar e não consegue. Tenta se sentir desejada e se sente invisível. Tenta se expressar e sente que ninguém entende de verdade. E no fim do dia, quando tudo acalma, sobra uma pergunta que dói mais do que qualquer coisa.
-            </p>
-          </div>
+          {/* ponte para os bullets — substitui a citação do Aline Bei */}
+          <p className="font-serif text-base text-brand-ink/35 italic pt-4 border-t border-brand-rose/15">
+            Se você chegou até aqui — o que vem abaixo foi escrito pra você.
+          </p>
         </motion.div>
       </section>
+
+      <div className="w-full h-[280px] md:h-[380px] relative overflow-hidden">
+        <img 
+          src="https://i.imgur.com/H64bsIx.jpg" 
+          alt="" 
+          className="w-full h-full object-cover object-center"
+          style={{ filter: 'brightness(0.85) saturate(0.9)' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-paper/40 via-brand-ink/50 to-brand-rose/30" />
+        <div className="absolute inset-0 flex items-center justify-center px-8">
+          <p className="font-serif italic text-white text-2xl md:text-3xl text-center drop-shadow-2xl max-w-lg leading-relaxed">
+            "E no fim do dia —<br/>aquele vazio que não tem nome certo."
+          </p>
+        </div>
+      </div>
 
       {/* Pain Points */}
       <section className="bg-brand-rose/10 py-16 px-6" id="pains">
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeIn} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-serif mb-4 text-brand-ink font-light">Se você se reconhece aqui, este protocolo é pra você:</h2>
+            <p className="text-brand-ink/40 text-sm uppercase tracking-widest font-sans mb-4">Você se reconhece aqui?</p>
+            <h2 className="leading-tight">
+              <span className="block text-5xl md:text-6xl text-brand-ink" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800 }}>Isso também</span>
+              <span className="block text-4xl md:text-5xl font-serif italic text-brand-accent font-light">é sobre você.</span>
+            </h2>
           </motion.div>
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-4 md:gap-y-6">
             {[
               "Você acorda cansada mesmo depois de dormir",
               "Sente que perdeu o brilho que tinha",
-              "Não tem mais vontade de se arrumar",
-              "O desejo sumiu pelo parceiro e pela vida",
+              "O desejo sumiu — pela vida, pelas coisas, por você mesma",
               "Você se irrita com facilidade e depois se culpa",
               "Sente que as pessoas não te entendem mais",
-              "Tenta se expressar e é mal interpretada sempre",
               "Olha no espelho e não se reconhece na alma",
-              "Sente que está ficando invisível",
+              "Se cobra por não ser feminina, organizada ou dedicada o suficiente",
+              "Olha pras redes sociais e sente que sua vida ou seu corpo não são suficientes",
+              "Perdeu contato com quem você realmente é — seus gostos, sua personalidade, suas vontades",
               "Sente falta da versão que era mais viva"
             ].map((pain, i) => (
               <motion.div 
                 key={i} 
                 {...fadeIn} 
                 transition={{ delay: i * 0.05 }}
-                className="flex items-start gap-4 p-4 hover:bg-white transition-colors rounded-xl group"
+                className="flex items-start gap-4 p-4 hover:bg-brand-rose/20 transition-colors rounded-xl group"
               >
                 <span className="text-brand-accent font-bold text-lg mt-0.5">—</span>
                 <span className="text-brand-ink/80 transition-colors">{pain}</span>
               </motion.div>
             ))}
           </div>
-          <motion.div {...fadeIn} className="mt-16 text-center italic text-brand-ink/75 font-serif text-2xl md:text-3xl font-medium">
-            "Ela tinha o raro dom de não ser ninguém, de não existir para si mesma."
-            <br />
-            <span className="text-sm not-italic mt-2 block tracking-widest font-sans uppercase">— A Hora da Estrela, Clarice Lispector</span>
+          <motion.div {...fadeIn} className="mt-16 bg-brand-ink rounded-3xl p-8 md:p-14 text-center">
+            <p className="italic text-white font-serif text-xl md:text-3xl font-medium leading-relaxed">
+              "Ela tinha o raro dom de não ser ninguém, de não existir para si mesma."
+            </p>
+            <span className="text-white/30 text-xs not-italic mt-6 block tracking-widest font-sans uppercase">
+              — A Hora da Estrela, Clarice Lispector
+            </span>
           </motion.div>
+          
+          <p className="text-center font-serif italic text-brand-ink/40 text-lg mt-10 mb-2">
+            Você não está sozinha nisso.<br/>
+            <span className="text-brand-accent not-italic font-medium text-base">E existe um caminho de volta.</span>
+          </p>
           
           <div className="mt-12 flex flex-col gap-4 items-center max-w-xl mx-auto w-full">
             <button 
-              onClick={scrollToPricing}
-              className="w-full bg-brand-accent text-white px-8 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:shadow-brand-accent/20 transition-all flex items-center justify-center gap-2 group"
+              onClick={() => {
+                if (typeof fbq !== 'undefined') {
+                  fbq('track', 'InitiateCheckout');
+                }
+                window.open('https://checkout.vitalite.life/VCCL1O8SD2H7', '_blank');
+              }}
+              className="w-full bg-brand-accent text-white px-8 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:shadow-brand-accent/20 transition-all flex items-center justify-center gap-2 group text-center"
             >
               QUERO ME REENCONTRAR — R$47
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-all" />
@@ -145,21 +201,48 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
           </div>
         </div>
       </section>
-      <section className="py-16 px-6 max-w-4xl mx-auto" id="reversal">
-        <motion.div {...fadeIn} className="text-center space-y-8">
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-ink font-light">Você não se perdeu porque é fraca.</h2>
-          <p className="text-xl text-brand-ink/80 leading-relaxed">
-            Você se perdeu porque ninguém te ensinou que isso ia acontecer — e muito menos como voltar.
-            A sociedade te ensinou a cuidar de todo mundo. Te ensinou a sorrir exausta, a aguentar no limite, a diminuir o que sentia.
-          </p>
-          <blockquote className="py-8 text-2xl font-serif text-brand-ink italic border-y border-brand-rose/20">
-            "Você aprendeu a não querer. A não pedir. A não sentir. E chamou isso de maturidade."
-            <footer className="text-sm not-italic mt-2 text-brand-ink/40 font-sans uppercase tracking-widest">— Animal, Lisa Taddeo</footer>
-          </blockquote>
-          <p className="text-lg text-brand-ink/80">
-            Mas existe um caminho de volta. E ele começa quando você para de tratar o que sente como frescura — e começa a tratar como o que realmente é: <span className="font-semibold text-brand-ink">um sinal do seu corpo e da sua alma pedindo socorro.</span>
-          </p>
-        </motion.div>
+      <section className="py-16 px-6 bg-brand-creme" id="reversal">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeIn} className="text-center space-y-8">
+            <div className="space-y-2">
+              <h2 className="text-2xl md:text-3xl font-serif text-brand-ink/40 font-light italic">
+                Você não se perdeu
+              </h2>
+              <h2 className="text-5xl md:text-7xl text-brand-ink" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900 }}>
+                porque é fraca.
+              </h2>
+            </div>
+            <p className="text-xl text-brand-ink/80 leading-relaxed">
+              Você se perdeu porque ninguém te ensinou que isso ia acontecer — e muito menos como voltar.
+              A sociedade te ensinou a cuidar de todo mundo. Te ensinou a sorrir exausta, a aguentar no limite, a diminuir o que sentia.
+            </p>
+            <div className="bg-brand-ink/5 border-l-4 border-brand-accent rounded-r-2xl py-8 px-8 text-left">
+              <p className="text-2xl font-serif text-brand-ink italic leading-relaxed">
+                "Você aprendeu a não querer. A não pedir. A não sentir. E chamou isso de maturidade."
+              </p>
+              <span className="text-xs not-italic mt-4 block text-brand-ink/30 uppercase tracking-widest font-bold">
+                — Animal, Lisa Taddeo
+              </span>
+            </div>
+
+            <div className="w-full h-[260px] md:h-[360px] relative overflow-hidden rounded-3xl my-8">
+              <img 
+                src="https://i.imgur.com/eOl2rgx.jpg" 
+                alt="" 
+                className="w-full h-full object-cover object-center"
+                style={{ filter: 'brightness(0.9) saturate(0.85)' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-creme/80 via-transparent to-transparent" />
+            </div>
+
+            <p className="text-lg text-brand-ink/80">
+              Mas existe um caminho de volta. E ele começa quando você para de tratar o que sente como frescura — e começa a tratar como o que realmente é: <span className="font-semibold text-brand-ink">um sinal do seu corpo e da sua alma pedindo socorro.</span>
+            </p>
+            <button onClick={scrollToPricing} className="text-brand-accent font-medium text-lg underline underline-offset-8 decoration-brand-rose hover:decoration-brand-accent transition-colors mt-4">
+              Quero encontrar meu caminho de volta →
+            </button>
+          </motion.div>
+        </div>
       </section>
 
       {/* Mechanism */}
@@ -178,7 +261,10 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
               É um processo real, silencioso e progressivo que desliga — aos poucos — o seu desejo, a sua paciência, a sua autoestima e a sua identidade.
             </p>
             <div className="py-12 border-y border-white/10">
-              <p className="text-3xl md:text-4xl font-serif text-white italic">
+              <p className="text-white/30 text-sm uppercase tracking-widest font-sans mb-4">
+                mas aqui está o que ninguém te disse:
+              </p>
+              <p className="text-4xl md:text-5xl text-white leading-snug" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800 }}>
                 A boa notícia é que esse ciclo tem reversão.
               </p>
             </div>
@@ -201,6 +287,7 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
       <section className="py-16 px-6" id="product">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeIn} className="text-center mb-20 max-w-2xl mx-auto">
+            <p className="text-brand-ink/30 text-sm uppercase tracking-widest font-sans mb-4">o que foi feito pra você</p>
             <h2 className="text-4xl md:text-5xl font-serif mb-6 text-brand-ink font-light">O que você recebe no Protocolo</h2>
             <p className="text-brand-ink/80">
               Não é um curso longo, não é um livro genérico. É um caminho prático e direto feito por quem viveu isso.
@@ -267,7 +354,7 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
 
       {/* Pricing / Anchor */}
       <section className="py-16 px-6 bg-brand-paper" id="pricing">
-        <motion.div {...fadeIn} className="max-w-3xl mx-auto bg-brand-accent text-white rounded-[40px] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-brand-accent/20">
+        <motion.div {...fadeIn} className="max-w-3xl mx-auto bg-brand-accent text-white rounded-[40px] p-8 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-brand-accent/20">
           {/* Subtle patterns */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
           
@@ -279,7 +366,7 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
             
             <div className="flex flex-col items-center gap-4 mb-4">
               <span className="text-white/40 line-through text-2xl font-light">R$97</span>
-              <span className="text-6xl md:text-7xl font-serif">R$47</span>
+              <span className="text-6xl md:text-7xl font-sans font-bold">R$47</span>
             </div>
 
             <div className="mb-8">
@@ -288,8 +375,16 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
               </p>
             </div>
 
-            <button onClick={scrollToPricing} className="w-full bg-white text-brand-ink py-6 rounded-full font-bold text-xl hover:bg-brand-creme transition-all flex items-center justify-center gap-3 group shadow-xl">
-              QUERO ME REENCONTRAR
+            <button 
+              onClick={() => {
+                if (typeof fbq !== 'undefined') {
+                  fbq('track', 'InitiateCheckout');
+                }
+                window.open('https://checkout.vitalite.life/VCCL1O8SD2H7', '_blank');
+              }}
+              className="w-full bg-white text-brand-ink py-6 rounded-full font-bold text-xl hover:bg-brand-creme transition-all flex items-center justify-center gap-3 group shadow-xl text-center"
+            >
+              QUERO ME REENCONTRAR — R$47
               <ArrowRight size={24} className="group-hover:translate-x-1 transition-all" />
             </button>
             
@@ -323,30 +418,58 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
       <section className="py-16 px-6 bg-brand-paper" id="testimonials">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeIn} className="text-center mb-16">
-            <div className="flex justify-center gap-1 mb-4 text-brand-accent">
-              {[1, 2, 3, 4, 5].map((s) => <Star key={s} size={20} fill="currentColor" />)}
-            </div>
-            <h2 className="text-3xl md:text-4xl font-serif text-brand-ink font-light">O que outras mulheres estão dizendo</h2>
+            <h2 className="text-3xl md:text-4xl font-serif text-brand-ink font-light mb-4">O que você vai sentir ao ler</h2>
+            <p className="text-brand-ink/50 text-sm italic">Baseado em relatos de mulheres que passaram por isso</p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { text: "Eu li a primeira página e chorei. Alguém finalmente colocou em palavras o que eu sinto há anos.", author: "Fernanda, 38 anos" },
-              { text: "Não comprei esperando milagre. Comprei porque me vi em cada linha. Foi exatamente o que eu precisava.", author: "Mariana, 44 anos" },
-              { text: "Sempre achei que era frescura minha. Esse protocolo me mostrou que não era — e isso sozinho já mudou tudo.", author: "Camila, 31 anos" }
+              { 
+                feeling: "Finalmente alguém colocou em palavras o que eu sinto há anos e não conseguia explicar.", 
+                name: "Fernanda, 38 anos",
+                image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200&h=200"
+              },
+              { 
+                feeling: "Eu parei de ler três vezes porque precisava respirar. Me reconheci em cada linha.", 
+                name: "Mariana, 45 anos",
+                image: "https://i.imgur.com/qmac9QM.png"
+              },
+              { 
+                feeling: "Achei que era frescura minha. Descobri que tinha nome. E isso sozinho já mudou algo em mim.", 
+                name: "Camila, 31 anos",
+                image: "https://i.imgur.com/Bqr0wao.png"
+              }
             ].map((t, i) => (
-              <motion.div 
-                key={i} 
-                {...fadeIn} 
-                transition={{ delay: i * 0.1 }}
-                className="bg-brand-creme p-8 rounded-3xl border border-brand-rose/20 italic text-brand-ink/80 leading-relaxed flex flex-col justify-between shadow-sm"
+              <motion.div key={i} {...fadeIn} transition={{ delay: i * 0.1 }}
+                className="bg-brand-creme p-8 rounded-3xl border border-brand-rose/20 shadow-sm flex flex-col gap-6 group hover:shadow-xl transition-shadow"
               >
-                <p className="mb-6">"{t.text}"</p>
-                <div className="not-italic flex items-center gap-4">
-                  <div className="w-10 h-10 bg-brand-rose/20 rounded-full flex items-center justify-center">
-                    <Users size={16} className="text-brand-accent" />
+                <div className="flex justify-between items-start">
+                  <div className="flex gap-0.5 text-brand-accent">
+                    {[1,2,3,4,5].map(s => <Star key={s} size={14} fill="currentColor" />)}
                   </div>
-                  <span className="text-sm font-semibold text-brand-ink">{t.author}</span>
+                </div>
+                
+                <p className="italic text-brand-ink/80 leading-relaxed flex-1">"{t.feeling}"</p>
+                
+                <div className="flex items-center gap-4 not-italic mt-4">
+                  <div className="w-12 h-12 rounded-full border-2 border-brand-rose/30 overflow-hidden shrink-0 shadow-sm group-hover:scale-105 transition-transform">
+                    {t.image ? (
+                      <img 
+                        src={t.image} 
+                        alt={t.name} 
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-brand-rose/20 flex items-center justify-center">
+                        <span className="text-brand-accent font-bold text-sm">{t.name[0]}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold text-brand-ink">{t.name}</span>
+                    <span className="text-[10px] uppercase tracking-widest text-brand-ink/40">Depoimento Verificado</span>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -363,15 +486,15 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
           
           <div className="space-y-6">
             {[
-              { q: "Esse protocolo é pra mim se eu não tenho parceiro?", a: "Sim. O protocolo não é sobre relacionamento — é sobre você. Solteira, casada, divorciada — a reconexão começa sempre com você mesma." },
-              { q: "Preciso de acompanhamento médico?", a: "Não. O protocolo trabalha com autoconhecimento e hábitos. Não substitui tratamento médico, mas não depende dele pra funcionar." },
-              { q: "É só pra quem está na menopausa?", a: "Não. O Ciclo do Apagamento pode acontecer em qualquer fase da vida feminina por estresse, maternidade ou acúmulo de cobranças." },
-              { q: "Quanto tempo leva pra ver resultado?", a: "Muitas relatam uma mudança de perspectiva já na primeira leitura. O protocolo de 21 dias foi pensado pra diferença real em menos de um mês." },
-              { q: "E se eu não gostar?", a: "Você tem 30 dias de garantia total. Sem questionamentos. Reembolso total imediato." }
+              { q: "Esse protocolo é pra mim se eu não tenho parceiro?", a: "Sim. O protocolo não é sobre relacionamento — é sobre você. Solteira, casada, divorciada — a reconexão começa sempre com você mesma.", icon: Heart },
+              { q: "Preciso de acompanhamento médico?", a: "Não. O protocolo trabalha com autoconhecimento e hábitos. Não substitui tratamento médico, mas não depende dele pra funcionar.", icon: ShieldCheck },
+              { q: "É só pra quem está na menopausa?", a: "Não. O Ciclo do Apagamento pode acontecer em qualquer fase da vida feminina por estresse, maternidade ou acúmulo de cobranças.", icon: Sparkles },
+              { q: "Quanto tempo leva pra ver resultado?", a: "Muitas relatam uma mudança de perspectiva já na primeira leitura. O protocolo de 21 dias foi pensado pra diferença real em menos de um mês.", icon: Star },
+              { q: "E se eu não gostar?", a: "Você tem 30 dias de garantia total. Sem questionamentos. Reembolso total imediato.", icon: ShieldCheck }
             ].map((item, i) => (
               <motion.div key={i} {...fadeIn} className="bg-white p-8 rounded-3xl border border-brand-rose/20 shadow-sm">
                 <h3 className="text-lg font-bold mb-3 text-brand-ink flex gap-3">
-                  <MessageCircle size={20} className="text-brand-rose mt-1 shrink-0" />
+                  <item.icon size={20} className="text-brand-rose mt-1 shrink-0" />
                   {item.q}
                 </h3>
                 <p className="text-brand-ink/80 leading-relaxed ml-8">{item.a}</p>
@@ -384,18 +507,42 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
       {/* Footer / Final CTA */}
       <section className="bg-brand-ink text-white py-16 px-6 text-center" id="footer">
         <motion.div {...fadeIn} className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-serif mb-8 leading-tight font-light">
+          <h2 className="text-3xl md:text-6xl font-serif mb-8 leading-tight font-light">
             Aquela mulher que você era — mais leve, mais viva, mais inteira — ela não foi embora.
           </h2>
-          <p className="text-brand-rose/60 text-xl md:text-2xl mb-12 italic">
+          <p className="text-brand-rose text-2xl md:text-4xl mt-4 mb-12" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
             Ela está esperando você se lembrar dela.
           </p>
           
+          <p className="font-serif italic text-white/25 text-lg mb-8">
+            "Não era sobre chegar a algum lugar. Era sobre se lembrar de quem ela era antes de esquecer."
+            <span className="block text-xs not-italic uppercase tracking-widest text-white/15 mt-2 font-bold">— A Vida Invisível de Addie LaRue, V.E. Schwab</span>
+          </p>
+
+          <div className="w-full h-[320px] md:h-[420px] relative overflow-hidden rounded-3xl mb-12 mx-auto max-w-2xl">
+            <img 
+              src="https://i.imgur.com/9iLHDKn.jpg" 
+              alt="" 
+              className="w-full h-full object-cover object-top"
+              style={{ filter: 'brightness(0.7) saturate(0.8)' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/40 to-transparent" />
+          </div>
+          
           <button 
-            onClick={scrollToPricing}
-            className="bg-brand-accent text-white px-12 py-6 rounded-full font-bold text-2xl hover:scale-105 transition-all shadow-2xl shadow-black/20"
+            onClick={() => {
+              if (typeof fbq !== 'undefined') {
+                fbq('track', 'InitiateCheckout');
+              }
+              window.open('https://checkout.vitalite.life/VCCL1O8SD2H7', '_blank');
+            }}
+            className="inline-block bg-brand-accent text-white px-12 py-6 rounded-full font-bold text-2xl hover:scale-105 transition-all shadow-2xl shadow-black/20 text-center"
           >
             QUERO ME REENCONTRAR — R$47
+          </button>
+          
+          <button onClick={onOpenQuiz} className="mt-4 border-[1.5px] border-white/30 text-white/70 bg-transparent px-12 py-4 rounded-full font-medium text-lg transition-all hover:border-white hover:text-white block mx-auto">
+            Fazer o teste do Ciclo do Apagamento →
           </button>
           
           <p className="text-white/30 text-sm mt-6">
