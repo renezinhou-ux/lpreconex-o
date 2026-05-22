@@ -202,7 +202,7 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
               <p className="font-serif text-brand-ink text-xl font-medium mb-2">
                 O Reencontro
               </p>
-              <p className="text-brand-ink/60 text-sm leading-relaxed font-serif italic">
+              <p className="text-brand-ink/90 text-lg md:text-xl leading-relaxed font-serif italic">
                 Um guia de 21 dias criado especialmente para acompanhar a sua jornada no Protocolo. Não está disponível em nenhum outro lugar.
               </p>
             </div>
