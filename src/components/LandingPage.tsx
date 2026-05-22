@@ -179,19 +179,33 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
             <span className="text-brand-accent not-italic font-medium text-base">E existe um caminho de volta.</span>
           </p>
 
-          <div className="mt-10 mb-4 space-y-3 text-center max-w-xl mx-auto">
-            <p className="text-brand-ink/50 line-through text-sm font-sans">
-              De R$97
-            </p>
-            <p className="text-brand-ink font-serif text-2xl">
-              Por apenas <span className="text-brand-accent font-semibold">R$47</span> — oferta de lançamento
-            </p>
-            <p className="text-brand-ink/60 text-sm italic font-serif">
-              🎁 Incluso: <strong>O Reencontro</strong> — guia prático de 21 dias para se reconectar com quem você é. De presente, junto com o Protocolo.
-            </p>
-            <p className="text-brand-ink/30 text-xs uppercase tracking-widest font-sans">
-              ⏳ Preço retorna a R$97 em breve
-            </p>
+          <div className="mt-10 mb-6 max-w-xl mx-auto">
+            {/* Preço com desconto */}
+            <div className="text-center mb-6">
+              <p className="text-brand-ink/40 line-through text-lg font-sans mb-1">
+                De R$97
+              </p>
+              <p className="font-serif leading-tight">
+                <span className="text-5xl text-brand-accent" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800 }}>R$47</span>
+                <span className="text-brand-ink/60 text-base ml-2">— oferta de lançamento</span>
+              </p>
+              <p className="text-brand-ink/30 text-xs uppercase tracking-widest font-sans mt-2">
+                ⏳ Preço retorna a R$97 em breve
+              </p>
+            </div>
+
+            {/* Bônus destaque */}
+            <div className="border border-brand-rose/40 rounded-2xl px-6 py-6 text-center bg-gradient-to-b from-brand-rose/10 to-transparent">
+              <p className="text-brand-accent font-bold text-xs uppercase tracking-widest mb-3">
+                🎁 Presente exclusivo para quem começar hoje
+              </p>
+              <p className="font-serif text-brand-ink text-xl font-medium mb-2">
+                O Reencontro
+              </p>
+              <p className="text-brand-ink/60 text-sm leading-relaxed font-serif italic">
+                Um guia de 21 dias criado especialmente para acompanhar a sua jornada no Protocolo. Não está disponível em nenhum outro lugar.
+              </p>
+            </div>
           </div>
           
           <div className="mt-12 flex flex-col gap-4 items-center max-w-xl mx-auto w-full">
@@ -204,7 +218,7 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
               }}
               className="w-full bg-brand-accent text-white px-8 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:shadow-brand-accent/20 transition-all flex items-center justify-center gap-2 group text-center"
             >
-              QUERO ME REENCONTRAR — R$47
+              QUERO ME REENCONTRAR
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-all" />
             </button>
             <button 
