@@ -178,6 +178,21 @@ export default function LandingPage({ onOpenQuiz }: LandingPageProps) {
             Você não está sozinha nisso.<br/>
             <span className="text-brand-accent not-italic font-medium text-base">E existe um caminho de volta.</span>
           </p>
+
+          <div className="mt-10 mb-4 space-y-3 text-center max-w-xl mx-auto">
+            <p className="text-brand-ink/50 line-through text-sm font-sans">
+              De R$97
+            </p>
+            <p className="text-brand-ink font-serif text-2xl">
+              Por apenas <span className="text-brand-accent font-semibold">R$47</span> — oferta de lançamento
+            </p>
+            <p className="text-brand-ink/60 text-sm italic font-serif">
+              🎁 Incluso: <strong>O Reencontro</strong> — guia prático de 21 dias para se reconectar com quem você é. De presente, junto com o Protocolo.
+            </p>
+            <p className="text-brand-ink/30 text-xs uppercase tracking-widest font-sans">
+              ⏳ Preço retorna a R$97 em breve
+            </p>
+          </div>
           
           <div className="mt-12 flex flex-col gap-4 items-center max-w-xl mx-auto w-full">
             <button 
